@@ -5,18 +5,23 @@ import ContactForm from './ContactForm/ContactForm';
 import Filter from './Filter/Filter';
 import ContactList from './ContactList/ContactList';
 import css from './App.module.css';
+import { useDispatch, useSelector } from 'react-redux';
 
 const LS_KEY = 'phonebook';
 
 export default function App() {
-  const [contacts, setContacts] = useState(() => {
-    return JSON.parse(localStorage.getItem(LS_KEY)) ?? [];
-  });
-  const [filter, setFilter] = useState('');
+  // const [contacts, setContacts] = useState(() => {
+  //   return JSON.parse(localStorage.getItem(LS_KEY)) ?? [];
+  // });
+  // const [filter, setFilter] = useState('');
 
-  useEffect(() => {
-    localStorage.setItem(LS_KEY, JSON.stringify(contacts));
-  }, [contacts]);
+  // useEffect(() => {
+  //   localStorage.setItem(LS_KEY, JSON.stringify(contacts));
+  // }, [contacts]);
+
+  const dispatch = useDispatch();
+  const contacts = useSelector(store => store.phonebook.contacts);
+  const filter = useSelector(store => store.phonebook.filter);
 
   const addContact = data => {
     const { name, number } = data;
@@ -36,17 +41,31 @@ export default function App() {
       number,
     };
     console.log(contact);
-
-    setContacts(prevState => [...prevState, contact]);
+    const action = {
+      type: 'contacts/addContact',
+      payload: contact,
+    };
+    dispatch(action);
+    // setContacts(prevState => [...prevState, contact]);
   };
 
   const deleteContact = id => {
-    setContacts(prevState => prevState.filter(contact => contact.id !== id));
+    // setContacts(prevState => prevState.filter(contact => contact.id !== id));
+    const action = {
+      type: 'contacts/removeContact',
+      payload: id,
+    };
+    dispatch(action);
   };
 
   const handleFilter = e => {
     const { value } = e.currentTarget;
-    setFilter(value);
+    // setFilter(value);
+    const action = {
+      type: 'contacts/setFilter',
+      payload: value,
+    };
+    dispatch(action);
   };
 
   const showFilteredContacts = () => {

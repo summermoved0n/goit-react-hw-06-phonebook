@@ -2,11 +2,21 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  max-width: 100%;
+  flex-wrap: wrap;
   margin-bottom: 5px;
-  padding: 5px 10px;
+  padding: 10px 10px;
   border: 1px solid rgba(0, 0, 0, 0.5);
   border-radius: 10px;
   background-color: #fff;
+}
+
+.item p {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 0;
 }
 
 .item_name {
