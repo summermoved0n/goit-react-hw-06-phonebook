@@ -1,13 +1,11 @@
-import { useEffect, useState } from 'react';
 import { nanoid } from 'nanoid';
-
 import ContactForm from './ContactForm/ContactForm';
 import Filter from './Filter/Filter';
 import ContactList from './ContactList/ContactList';
 import css from './App.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 
-const LS_KEY = 'phonebook';
+// const LS_KEY = 'phonebook';
 
 export default function App() {
   // const [contacts, setContacts] = useState(() => {
