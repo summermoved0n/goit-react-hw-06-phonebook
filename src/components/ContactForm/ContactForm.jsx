@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { nanoid } from 'nanoid';
 import css from './ContactForm.module.css';
 
 export default function ContactForm({ onSubmit }) {
@@ -34,8 +33,8 @@ export default function ContactForm({ onSubmit }) {
     setNumber('');
   };
 
-  const inputNameId = nanoid();
-  const inputNumberId = nanoid();
+  const inputNameId = 'nameInput';
+  const inputNumberId = 'numberInput';
 
   return (
     <form className={css.form} onSubmit={handleSubmit}>
