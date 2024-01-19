@@ -1,8 +1,15 @@
 import { nanoid } from 'nanoid';
 import css from './Filter.module.css';
+import { useDispatch } from 'react-redux';
+import { setFilter } from '../../redux/contactsSlice';
 
-export default function Filter({ value, onChange }) {
+export default function Filter() {
+  const dispatch = useDispatch();
   const inputFilterId = nanoid();
+  const handleFilter = e => {
+    const { value } = e.currentTarget;
+    dispatch(setFilter(value));
+  };
 
   return (
     <label className={css.filter} htmlFor={inputFilterId}>
@@ -11,9 +18,8 @@ export default function Filter({ value, onChange }) {
         className={css.filter_input}
         type="text"
         name="filter"
-        value={value}
         id={inputFilterId}
-        onChange={onChange}
+        onChange={handleFilter}
       />
     </label>
   );
