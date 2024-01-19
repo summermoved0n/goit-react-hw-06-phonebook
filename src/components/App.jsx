@@ -4,19 +4,13 @@ import Filter from './Filter/Filter';
 import ContactList from './ContactList/ContactList';
 import css from './App.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-
-// const LS_KEY = 'phonebook';
+import {
+  addNewContact,
+  removeContact,
+  setFilter,
+} from '../redux/contactsSlice';
 
 export default function App() {
-  // const [contacts, setContacts] = useState(() => {
-  //   return JSON.parse(localStorage.getItem(LS_KEY)) ?? [];
-  // });
-  // const [filter, setFilter] = useState('');
-
-  // useEffect(() => {
-  //   localStorage.setItem(LS_KEY, JSON.stringify(contacts));
-  // }, [contacts]);
-
   const dispatch = useDispatch();
   const contacts = useSelector(store => store.phonebook.contacts);
   const filter = useSelector(store => store.phonebook.filter);
@@ -39,31 +33,16 @@ export default function App() {
       number,
     };
     console.log(contact);
-    const action = {
-      type: 'contacts/addContact',
-      payload: contact,
-    };
-    dispatch(action);
-    // setContacts(prevState => [...prevState, contact]);
+    dispatch(addNewContact(contact));
   };
 
   const deleteContact = id => {
-    // setContacts(prevState => prevState.filter(contact => contact.id !== id));
-    const action = {
-      type: 'contacts/removeContact',
-      payload: id,
-    };
-    dispatch(action);
+    dispatch(removeContact(id));
   };
 
   const handleFilter = e => {
     const { value } = e.currentTarget;
-    // setFilter(value);
-    const action = {
-      type: 'contacts/setFilter',
-      payload: value,
-    };
-    dispatch(action);
+    dispatch(setFilter(value));
   };
 
   const showFilteredContacts = () => {
